@@ -4,19 +4,17 @@ import CartContext from '../../context/CartContext'
 const CartSummary = () => (
   <CartContext.Consumer>
     {value => {
-      const {CartList} = value
+      const {cartList} = value
       let total = 0
-      if (CartList.length > 0) {
-        for (const item of CartList) {
-          console.log(item)
-          total = total + item.price * item.quantity
-        }
-      }
+      cartList.forEach(each => {
+        total += each.price * each.quantity
+      })
       return (
         <div className="costContainer">
           <h1>
             Order Total:<span>{total}/-</span>
           </h1>
+          <p>{cartList.length} items in cart</p>
           <button className="checkout" type="button">
             CheckOut
           </button>
